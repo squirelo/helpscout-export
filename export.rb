@@ -27,8 +27,9 @@ puts "Exporting #{mailbox.name}..."
 
 active_conversations = helpscout.conversations(mailbox_id, "active", nil)
 pending_conversations = helpscout.conversations(mailbox_id, "pending", nil)
+closed_conversations = helpscout.conversations(mailbox_id, "closed", nil)
 
-conversations = active_conversations + pending_conversations
+conversations = active_conversations + pending_conversations + closed_conversations
 
 CSV.open("conversations_#{mailbox_id}.csv", "wb", col_sep: ';', headers: true) do |csv|
   csv << ["Number", "From", "Subject", "Created"]
