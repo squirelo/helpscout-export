@@ -32,10 +32,10 @@ closed_conversations = helpscout.conversations(mailbox_id, "closed", nil)
 conversations = active_conversations + pending_conversations + closed_conversations
 
 CSV.open("conversations_#{mailbox_id}.csv", "wb", col_sep: ';', headers: true) do |csv|
-  csv << ["Number", "From", "Subject", "Created"]
+  csv << ["Number", "From", "Subject", "Created", "Modified"]
   conversations.each do |conversation|
     customer = conversation.customer
-    csv << [conversation.number, customer.email, conversation.subject, conversation.createdAt]
+    csv << [conversation.number, customer.email, conversation.subject, conversation.createdAt, conversation.modifiedAt]
   end
 end
 
